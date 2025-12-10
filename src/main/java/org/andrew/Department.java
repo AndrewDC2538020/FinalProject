@@ -1,8 +1,16 @@
 package org.andrew;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@EqualsAndHashCode
+@ToString
 public class Department {
     private String departmentId;
-    private String departmentName;
+    @Setter private String departmentName;
     private static int nextId = 1;
 
     /**
@@ -22,4 +30,20 @@ public class Department {
         return true;
     }
 
+    /**
+     * creates the object with everything as null if the department name is invalid
+     * @param departmentName the department name input
+     */
+    public Department(String departmentName) {
+        if (isDepartmentNameValid(departmentName)) {
+            this.departmentName = departmentName;
+
+            // Auto-generate ID: D01, D02, D03 ...
+            this.departmentId = "D" + String.format("%02d", nextId);
+            nextId++;
+        } else {
+            this.departmentId = null;
+            this.departmentName = null;
+        }
+    }
 }
