@@ -1,9 +1,16 @@
 package org.andrew;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.ArrayList;
 
+@EqualsAndHashCode
+@Getter
+@Setter
 public class Course {
-    private String courseId;                 // C-departmentId-##
+    private String courseId;
     private String courseName;
     private double credits;
     private Department department;
@@ -112,5 +119,48 @@ public class Course {
         System.out.println();
     }
 
+    /**
+     * converts a course to a simple string with only the courseId, courseName, credits, and departmentName.
+     * @return a simple string with only the courseId, courseName, credits, and departmentName
+     */
+    public String toSimplifiedString() {
+        return courseId + " " + courseName + " " + credits + " " +
+                department.getDepartmentName();
+    }
 
+    /**
+     *  converts a course to a string that contains the courseId, the courseName,
+     *  the credits, the departmentName the assignments,
+     *  the registeredStudents (only the studentId, the studentName and the departmentName),
+     *  and a line to show if the current isAssignmentWeightValid is valid or not.
+     * @return a string that contains the courseId, the courseName,
+     * the credits, the departmentName the assignments,
+     * the registeredStudents (only the studentId, the studentName and the departmentName),
+     * and a line to show if the current isAssignmentWeightValid is valid or not.
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(courseId).append(", ")
+                .append(courseName).append(", ")
+                .append(credits).append(", ")
+                .append(department.getDepartmentName()).append("\n");
+
+        sb.append("Assignments: ").append(assignments).append("\n");
+        sb.append("Students:\n");
+
+        for (Student s : registeredStudents) {
+            sb.append("  ")
+                    .append(s.getStudentId()).append(" ")
+                    .append(s.getStudentName()).append(" ")
+                    .append(s.getDepartment().getDepartmentName())
+                    .append("\n");
+        }
+
+        sb.append("Assignment weight valid: ")
+                .append(isAssignmentWeightValid());
+
+        return sb.toString();
+    }
 }
