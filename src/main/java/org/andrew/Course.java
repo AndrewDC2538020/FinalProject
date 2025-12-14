@@ -37,11 +37,80 @@ public class Course {
 
         registeredStudents.add(student);
 
-        // add null score to each assignment
         for (Assignment a : assignments) {
             a.addScorePlaceholder();
         }
         return true;
     }
+
+    /**
+     * calculates the weighted average score of a student.
+     * @param index the index input
+     * @return the average score of a student
+     */
+    public int calcStudentAverage(int index) {
+        double total = 0;
+
+        for (Assignment a : assignments) {
+            Integer score = a.getScores().get(index);
+            if (score != null) {
+                total += score * a.getWeight() / 100;
+            }
+        }
+        return (int) total;
+    }
+
+    /**
+     * adds a new assignment to the course, always return true.
+     * @param assignmentName the assignmentName input
+     * @param weight the weight input
+     * @param maxScore the maxScore input
+     * @return true
+     */
+    public boolean addAssignment(String assignmentName, double weight, int maxScore) {
+        assignments.add(new Assignment(assignmentName, weight));
+
+        // add placeholder scores for existing students
+        for (int i = 0; i < registeredStudents.size(); i++) {
+            assignments.get(assignments.size() - 1).addScorePlaceholder();
+        }
+        return true;
+    }
+
+    /**
+     * generates random scores for each assignment and student, and calculates the final score for each student.
+     */
+    public void generateScores() {
+        for (Assignment a : assignments) {
+            a.generateRandomScore();
+        }
+    }
+
+    /**
+     * displays the scores of a course in a table, with the assignment averages and student weighted average.
+     */
+    public void displayScores() {
+        System.out.println("Course: " + courseName + " (" + courseId + ")");
+
+        for (Assignment a : assignments) {
+            System.out.print(a.getAssignmentName() + "\t");
+        }
+        System.out.println("Final");
+
+        for (int i = 0; i < registeredStudents.size(); i++) {
+            System.out.print(registeredStudents.get(i).getStudentName() + "\t");
+            for (Assignment a : assignments) {
+                System.out.print(a.getScores().get(i) + "\t");
+            }
+            System.out.println(calcStudentAverage(i));
+        }
+
+        System.out.print("Average\t");
+        for (Assignment a : assignments) {
+            System.out.print((int) a.calcAssignmentAvg() + "\t");
+        }
+        System.out.println();
+    }
+
 
 }
