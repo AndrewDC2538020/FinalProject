@@ -3,19 +3,19 @@ package org.andrew;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import util.Util;
 
 import java.util.ArrayList;
 
 @EqualsAndHashCode
 @Getter
-@Setter
 public class Course {
-    private String courseId;
+    @Setter private String courseId;
     private String courseName;
-    private double credits;
-    private Department department;
-    private ArrayList<Assignment> assignments;
-    private ArrayList<Student> registeredStudents;
+    @Setter private double credits;
+    @Setter private Department department;
+    @Setter private ArrayList<Assignment> assignments;
+    @Setter private ArrayList<Student> registeredStudents;
 
     private static int nextId = 1;
 
@@ -77,7 +77,6 @@ public class Course {
     public boolean addAssignment(String assignmentName, double weight, int maxScore) {
         assignments.add(new Assignment(assignmentName, weight));
 
-        // add placeholder scores for existing students
         for (int i = 0; i < registeredStudents.size(); i++) {
             assignments.get(assignments.size() - 1).addScorePlaceholder();
         }
@@ -162,5 +161,13 @@ public class Course {
                 .append(isAssignmentWeightValid());
 
         return sb.toString();
+    }
+
+    /**
+     * sets course name
+     * @param courseName the course name input
+     */
+    public void setCourseName(String courseName) {
+        this.courseName = Util.toTitleCase(courseName);
     }
 }
