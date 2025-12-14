@@ -68,4 +68,9 @@ public class Assignment {
                 ", weight=" + weight +
                 '}';
     }
+
+    public String getAssignmentId() { return assignmentId; }
+    public String getAssignmentName() { return assignmentName; }
+    public double getWeight() { return weight; }
+    public ArrayList<Integer> getScores() { return scores; }
 }
