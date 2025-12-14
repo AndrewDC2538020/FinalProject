@@ -1,10 +1,17 @@
 package org.andrew;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@EqualsAndHashCode
+@Getter
+@Setter
 public class Student {
-    private String studentId;                  // S###### (auto)
+    private String studentId;
     private String studentName;
     private Gender gender;
     private Address address;
@@ -39,4 +46,29 @@ public class Student {
         return true;
     }
 
+    public boolean dropCourse(Course course) {
+        if (!registeredCourses.contains(course))
+            return false;
+
+        registeredCourses.remove(course);
+        course.getRegisteredStudents().remove(this);
+        return true;
+    }
+
+    public String toSimplifiedString() {
+        return studentId + " - " + studentName + " (" +
+                department.getDepartmentName() + ")";
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "studentId='" + studentId + '\'' +
+                ", studentName='" + studentName + '\'' +
+                ", gender=" + gender +
+                ", address=" + address +
+                ", department=" + department +
+                ", registeredCourses=" + registeredCourses +
+                '}';
+    }
 }
