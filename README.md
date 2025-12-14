@@ -23,4 +23,4 @@ unit tests for key methods.
 - JUnit 5
 
 ## Git Repository
-  https://github.com/AndrewDC2538020/FinalProject
+https://github.com/AndrewDC2538020/FinalProject.git
