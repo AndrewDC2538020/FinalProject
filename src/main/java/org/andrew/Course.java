@@ -14,10 +14,22 @@ public class Course {
     private String courseName;
     @Setter private double credits;
     @Setter private Department department;
-    @Setter private ArrayList<Assignment> assignments;
-    @Setter private ArrayList<Student> registeredStudents;
+    private ArrayList<Assignment> assignments;
+    private ArrayList<Student> registeredStudents;
 
     private static int nextId = 1;
+
+    public Course(String courseName, double credits, Department department) {
+        this.courseName = Util.toTitleCase(courseName);
+        this.credits = credits;
+        this.department = department;
+
+        this.assignments = new ArrayList<>();
+        this.registeredStudents = new ArrayList<>();
+
+        this.courseId = "C-" + department.getDepartmentId() + "-" +
+                String.format("%02d", nextId++);
+    }
 
     /**
      * checks if the sum of weights of all assignments of that course equals to 100%.
