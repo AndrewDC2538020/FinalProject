@@ -1,6 +1,6 @@
 # Final Project
 
-## Author: Andrew Daniel Chihaia 
+## Author: Andrew Daniel Chihaia (ID:2538020)
 
 This is the final project for the Vanier Introduction to Programming.This project implements a student, course, and assignment management
 system in Java. It follows object-oriented design principles and includes
