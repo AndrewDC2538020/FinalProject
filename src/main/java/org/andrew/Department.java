@@ -38,7 +38,6 @@ public class Department {
         if (isDepartmentNameValid(departmentName)) {
             this.departmentName = departmentName;
 
-            // Auto-generate ID: D01, D02, D03 ...
             this.departmentId = "D" + String.format("%02d", nextId);
             nextId++;
         } else {
