@@ -73,4 +73,12 @@ public class Assignment {
     public String getAssignmentName() { return assignmentName; }
     public double getWeight() { return weight; }
     public ArrayList<Integer> getScores() { return scores; }
+
+    public void addScorePlaceholder() {
+        scores.add(null);
+    }
+
+    public void removeScore(int index) {
+        scores.remove(index);
+    }
 }
